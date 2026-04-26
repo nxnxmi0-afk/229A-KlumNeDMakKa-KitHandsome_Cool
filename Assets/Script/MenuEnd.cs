@@ -1,16 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuEnd : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Restart()
     {
-        
+        SceneManager.LoadScene("GameScene");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Exit()
     {
-        
+        SceneManager.LoadScene("Menu");
     }
+
 }

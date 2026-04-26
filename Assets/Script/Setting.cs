@@ -1,16 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Setting : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Exit()
     {
-        
+        SceneManager.LoadScene("Menu");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+
