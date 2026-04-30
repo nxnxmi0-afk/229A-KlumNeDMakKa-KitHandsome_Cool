@@ -1,7 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GolfContoller : MonoBehaviour
 {
+    float hitForce, SliderHitForce;
+    Vector3 lastPositionsenser;
+    Slider forceslider;
+        void OnSliderValueChange()
+    {
+        SliderHitForce = hitForce * forceslider.value;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
