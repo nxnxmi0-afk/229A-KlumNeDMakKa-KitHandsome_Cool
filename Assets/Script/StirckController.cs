@@ -1,42 +1,72 @@
+﻿using System;
 using Unity.Multiplayer.PlayMode;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StirckController : MonoBehaviour
 {
-    private Transform Stick;
+    
     public Camera maincamera;
 
-    float hitforce;
-    float Sliderhitforce;
+    float Sliderhitforce,StickhitSpeed;
 
-    
-    Slider forceSlider;
+    [NonSerialized]public Transform stick;
+    Rigidbody2D rb;
 
-    public void OnSliderValueChange()
+    float pullAmount = 0f;
+    float maxPull = 10f;
+    Vector3 startPos;
+
+
+
+
+    void handleMouseInput()
     {
-        Sliderhitforce = hitforce * forceSlider.value; 
+        if (!Input.GetKey(KeyCode.Space))
+        {
+            Vector3 mousePos = maincamera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = stick.position.z;
+
+            Vector3 dir = mousePos - stick.position;
+
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+      
+        
+            stick.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+        }
     }
-       void handleMouseInput()
+    void change()
     {
-        Vector3 mousePos = maincamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = Stick.position.z;
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                pullAmount += Time.deltaTime * 6f;
+                pullAmount = Mathf.Clamp(pullAmount, 0, maxPull);
 
-        Vector3 dir = mousePos - Stick.position;
-
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        Stick.rotation = Quaternion.Euler(0f, 0f, angle);
+                // ง้างจากตำแหน่งเดิม
+                stick.localPosition = startPos - stick.up * pullAmount;
+            }
+            else
+            {
+                // กลับไปตำแหน่งเดิม
+                stick.localPosition = Vector3.Lerp(stick.localPosition, startPos, Time.deltaTime * 10f);
+            }
+        }
     }
-       
+
     void Start()
     {
-        Stick = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody2D>();
+        stick = GetComponent<Transform>();
+        rb.gravityScale = 0;
+        startPos = stick.localPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
         handleMouseInput();
-    }
+        change();
+/*        stick.position = ball.position;
+*/    }
 }
