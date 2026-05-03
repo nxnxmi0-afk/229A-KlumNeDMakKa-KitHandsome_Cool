@@ -39,11 +39,7 @@ public class Timer : MonoBehaviour
             timeText.text = timer.ToString("Game Over");
             SceneManager.LoadScene("End_time");
         }
-        else if (timer < 0)
-        {
-            timer = 0;
-            SceneManager.LoadScene("End_time");
-        }
+       
     }
 
    
