@@ -26,5 +26,6 @@ public class GolfContoller : MonoBehaviour
         {
             SceneManager.LoadScene("End");
         }
+       
     }
 }
