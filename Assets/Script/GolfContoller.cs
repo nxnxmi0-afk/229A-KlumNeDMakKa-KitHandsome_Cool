@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GolfContoller : MonoBehaviour
@@ -18,8 +19,12 @@ public class GolfContoller : MonoBehaviour
         if (other.CompareTag("Water"))
         {
             transform.position = startPosition;
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
+        }
+        if (other.CompareTag("Hole"))
+        {
+            SceneManager.LoadScene("End");
         }
     }
 }

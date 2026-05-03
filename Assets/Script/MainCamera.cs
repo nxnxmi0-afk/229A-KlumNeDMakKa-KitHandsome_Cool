@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CameraFollow2D : MonoBehaviour
 {
     private Vector3 offset = new Vector3(0f, 0f, -10f);

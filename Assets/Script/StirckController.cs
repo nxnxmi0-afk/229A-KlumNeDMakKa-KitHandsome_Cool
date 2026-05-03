@@ -2,7 +2,7 @@
 using Unity.Multiplayer.PlayMode;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class StirckController : MonoBehaviour
 {
     public Rigidbody2D ballRb;
@@ -91,7 +91,7 @@ public class StirckController : MonoBehaviour
     void SelectStick(GameObject selected)
     {
         sr.sortingOrder = 1;
-        if (ballRb.velocity.magnitude >= 1f) return;
+        if (ballRb.linearVelocity.magnitude >= 1f) return;
 
         isSelectingStick = true;
 
@@ -102,7 +102,7 @@ public class StirckController : MonoBehaviour
 
             selected.SetActive(true);
 
-         if (ballRb.velocity.sqrMagnitude > 0.05f)
+         if (ballRb.linearVelocity.sqrMagnitude > 0.05f)
         {
             sr.sortingOrder = 0;
         }
@@ -115,7 +115,7 @@ public class StirckController : MonoBehaviour
     }
     void moving()
     {
-        if (ballRb.velocity.sqrMagnitude > 0.05f)
+        if (ballRb.linearVelocity.sqrMagnitude > 0.05f)
         {
             sr.sortingOrder = 0;
         }
