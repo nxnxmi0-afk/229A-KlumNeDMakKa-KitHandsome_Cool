@@ -8,7 +8,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    public void OpenSetting()
+    public void Setting()
     {
         SceneManager.LoadScene("Setting");
     }
